@@ -1,1 +1,8 @@
-
+streamlit 
+nbformat 
+nbconvert 
+requests 
+beautifulsoup4 
+plotly 
+selenium 
+webdriver-manager
