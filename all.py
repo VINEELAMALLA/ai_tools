@@ -17,7 +17,7 @@ from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 
 # Set page config for better UI
-st.set_page_config(page_title="AI-Powered Analysis Tool", layout="wide")
+st.set_page_config(page_title="AI-Powered Tools", layout="wide")
 
 # Custom CSS for improved UI
 st.markdown("""
@@ -97,7 +97,7 @@ def generate_questions(text):
         else:
             questions.append(f"What is the context of '{sentence[:30]}...'?")
 
-    return questions[:5] if questions else ["No questions could be generated from the text."]
+    return questions[:20] if questions else ["No questions could be generated from the text."]
 
 def get_leetcode_stats(username):
     try:
@@ -166,12 +166,13 @@ def main():
             
             st.markdown("### ❓ Question Generator")
             text_input = st.text_area("Enter text to generate questions", height=150)
+            num_questions = st.slider("Select number of questions (max 20)", min_value=1, max_value=20, value=5)
             if st.button("Generate Questions"):
                 if text_input:
                     with st.spinner("Generating questions..."):
                         questions = generate_questions(text_input)
                         st.subheader("Generated Questions")
-                        for q in questions:
+                        for q in questions[:num_questions]:
                             st.markdown(f"- {q}")
     
     with col2:
